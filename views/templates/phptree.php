@@ -21,6 +21,11 @@ $files;
     <p class="folder-name" onclick="openFolder(this.parentElement, <?=$folder["ID"]?>)"><?=$folder["_NAME"]?></p>
 </div>
 <?php }?>
+<?php foreach ($files as $file) {?>
+    <div class="folder">
+        <p class="file"><?=$file["_NAME"]?></p>
+    </div>
+<?php }?>
 
 <div class="form-add">Создать
     <form class="create-form" target="/phptree" method="post">
