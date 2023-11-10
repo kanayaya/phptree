@@ -16,13 +16,8 @@ class TreeController
     public function __construct()
     {
         $full = file_get_contents(__DIR__ . "/../credentials.txt");
-        $user = array();
-        preg_match('/user=(,?\w+)/', $full, $user);
-        $user = str_replace('user=', '', $user[0]);
-
-        $password = array();
-        preg_match('/password=([\w&\/<>?.,:;*^{}\]\[]+)/', $full, $password);
-        $password = str_replace('password=', '', $password[0]);
+        $user = self::getUsername($full);
+        $password = self::getPassword($full);
 
         $this->repository = new Repository($user, $password);
     }
@@ -96,4 +91,28 @@ function handlePost(): void
         echo json_encode($all);
     }
 }
+
+    /**
+     * @param $full
+     * @return array|string|string[]
+     */
+    private static function getUsername($full)
+    {
+        $user = array();
+        preg_match('/user=(,?\w+)/', $full, $user);
+        $user = str_replace('user=', '', $user[0]);
+        return $user;
+    }
+
+    /**
+     * @param $full
+     * @return array|string|string[]
+     */
+    private static function getPassword($full)
+    {
+        $password = array();
+        preg_match('/password=([\w&\/<>?.,:;*^{}\]\[]+)/', $full, $password);
+        $password = str_replace('password=', '', $password[0]);
+        return $password;
+    }
 }
