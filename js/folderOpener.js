@@ -20,7 +20,6 @@ function openFolder(folder, folderId) {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 try {
                     for (let i = 0; i < data.folders.length; i++) {
                         folder.innerHTML +=
@@ -69,7 +68,7 @@ function addNew(button) {
     req = req.substring(0, req.length - 1)
     fetch('?' + req, {
         method: 'POST',
-    }).then(r => r.blob()).then(r => r.text()).then( t => {
+    }).then(r => r.blob()).then(r => r.text()).then(() => {
         let folder = button.parentElement.parentElement.parentElement;
         if (folderId > 0) {
             openFolder(folder, folderId);
@@ -78,6 +77,4 @@ function addNew(button) {
             location.reload();
         }
     })
-
-
 }
