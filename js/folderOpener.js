@@ -61,6 +61,8 @@ function openFolder(folder, folderId) {
 
 function addNew(button) {
     const fd = new FormData(button.parentElement);
+    const folderId = fd.get('parentId');
+    console.log(folderId);
     let req = '';
     fd.forEach(function(value, key){
         req = req +  (key + '=' + value + '&')
@@ -69,5 +71,12 @@ function addNew(button) {
     console.log(req)
     fetch('?' + req, {
         method: 'POST',
-    }).then(r => r.blob()).then(r => r.text()).then( t => console.log(t))
+    }).then(r => r.blob()).then(r => r.text()).then( t => {
+        console.log(t)
+        let folder = button.parentElement.parentElement.parentElement;
+        openFolder(folder, folderId);
+        openFolder(folder, folderId);
+    })
+
+
 }
