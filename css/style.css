@@ -1,0 +1,55 @@
+.folder, .folder-full {
+    margin: 5px 0 5px 40px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    padding: 1px;
+    background: rgba(128, 128, 128, 0.05);
+}
+
+.folder-name {
+    position: relative;
+    height: 18px;
+    padding-left: 25px;
+    margin: 5px 0 5px 0;
+    overflow: visible;
+}
+
+.folder-name::before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background: url("../img/folder_empty.svg") center center no-repeat;
+    background-size: cover;
+    left: 0;
+}
+.folder-full > .folder-name::before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background: url("../img/folder_files.svg") center center no-repeat;
+    background-size: cover;
+    left: 0;
+}
+.file {
+    position: relative;
+    height: 18px;
+    padding-left: 25px;
+    margin: 5px 0 5px 0;
+    overflow: visible;
+}
+.file::before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background: url("../img/file.svg") center center no-repeat;
+    background-size: cover;
+    left: 0;
+}
+.form-add {
+    height: 40px;
+    background: aliceblue;
+    width: 400px;
+}
