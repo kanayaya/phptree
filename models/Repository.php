@@ -51,6 +51,9 @@ class Repository
             $name = $folder->getName();
             $parentId = $folder->getParentId();
 
+            $str_num = $this->check_foldername($parentId, $name);
+            $name.=$str_num;
+
             $query = "INSERT INTO Folder (PARENT_ID, _NAME, IS_EMPTY)
 VALUES ('$parentId','$name', 1)";
         } else {
@@ -81,6 +84,9 @@ VALUES ('$parentId','$name', 1)";
             $parentId = $file->getParentId();
             $isLink = $file->isLink() ? 1 : 0;
             $content = $file->getContent();
+
+            $str_num = $this->check_filename($parentId, $name);
+            $name.=$str_num;
 
             $query = "INSERT INTO File (PARENT_ID, _NAME, IS_LINK, CONTENT)
 VALUES ('$parentId', '$name', $isLink, '$content')";
@@ -123,7 +129,43 @@ VALUES ('$parentId', '$name', $isLink, '$content')";
 
     }
 
+    /**
+     * @param int $parentId
+     * @param string $name
+     * @return string
+     */
+    public function check_filename(int $parentId, string $name): string
+    {
+        $ar = $this->getFilesByParent($parentId);
+        $num = 1;
+        $str_num = '';
+        while ($res = $ar->fetch_assoc()) {
+            if ($name . $str_num === $res["_NAME"]) {
+                $str_num = ' (' . $num . ')';
+                $num++;
+            }
+        }
+        return $str_num;
+    }
 
+    /**
+     * @param int $parentId
+     * @param string $name
+     * @return string
+     */
+    public function check_foldername(int $parentId, string $name): string
+    {
+        $ar = $this->getFoldersByParent($parentId);
+        $num = 1;
+        $str_num = '';
+        while ($res = $ar->fetch_assoc()) {
+            if ($name . $str_num === $res["_NAME"]) {
+                $str_num = ' (' . $num . ')';
+                $num++;
+            }
+        }
+        return $str_num;
+    }
 
 
 }
