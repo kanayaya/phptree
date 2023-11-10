@@ -74,6 +74,8 @@ function addNew(button) {
         if (folderId > 0) {
             openFolder(folder, folderId);
             openFolder(folder, folderId);
+        } else {
+            location.reload();
         }
     })
 
