@@ -15,7 +15,16 @@ class TreeController
      */
     public function __construct()
     {
-        $this->repository = new Repository("kanayaya", "7092");
+        $full = file_get_contents(__DIR__ . "/../credentials.txt");
+        $user = array();
+        preg_match('/user=(,?\w+)/', $full, $user);
+        $user = str_replace('user=', '', $user[0]);
+
+        $password = array();
+        preg_match('/password=([\w&\/<>?.,:;*^{}\]\[]+)/', $full, $password);
+        $password = str_replace('password=', '', $password[0]);
+
+        $this->repository = new Repository($user, $password);
     }
 
     function handleIndexRequest()
