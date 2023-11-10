@@ -62,20 +62,19 @@ function openFolder(folder, folderId) {
 function addNew(button) {
     const fd = new FormData(button.parentElement);
     const folderId = fd.get('parentId');
-    console.log(folderId);
     let req = '';
     fd.forEach(function(value, key){
         req = req +  (key + '=' + value + '&')
     });
     req = req.substring(0, req.length - 1)
-    console.log(req)
     fetch('?' + req, {
         method: 'POST',
     }).then(r => r.blob()).then(r => r.text()).then( t => {
-        console.log(t)
         let folder = button.parentElement.parentElement.parentElement;
-        openFolder(folder, folderId);
-        openFolder(folder, folderId);
+        if (folderId > 0) {
+            openFolder(folder, folderId);
+            openFolder(folder, folderId);
+        }
     })
 
 
