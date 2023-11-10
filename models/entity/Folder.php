@@ -15,6 +15,7 @@ class Folder
      */
     public function __construct(int $id, int $parentId, string $name, bool $isEmpty)
     {
+        if (strlen($name) < 1) $name = 'Новая папка';
         $this->id = $id;
         $this->parentId = $parentId;
         $this->name = $name;

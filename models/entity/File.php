@@ -1,5 +1,7 @@
 <?php
 namespace phptree\models\entity;
+use Exception;
+
 class File
 {
     private int $id;
@@ -14,9 +16,11 @@ class File
      * @param string $name
      * @param bool $isLink
      * @param string $content
+     * @throws Exception
      */
     public function __construct(int $id, int $parentId, string $name, bool $isLink, string $content)
     {
+        if (strlen($name) < 1) $name = 'Новый файл';
         $this->id = $id;
         $this->parentId = $parentId;
         $this->name = $name;
@@ -65,6 +69,9 @@ class File
     }
 
 
+    /**
+     * @throws Exception
+     */
     public static function getNew(int $parentId, string $name, bool $isLink, string $content) {
         return new File(0, $parentId, $name, $isLink, $content);
     }
