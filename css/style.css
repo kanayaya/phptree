@@ -6,12 +6,13 @@
     background: rgba(128, 128, 128, 0.05);
 }
 
-.folder-name {
+.folder-name, .file {
     position: relative;
     height: 18px;
     padding-left: 25px;
     margin: 5px 0 5px 0;
     overflow: visible;
+    cursor: pointer;
 }
 
 .folder-name::before {
@@ -31,13 +32,6 @@
     background: url("../img/folder_files.svg") center center no-repeat;
     background-size: cover;
     left: 0;
-}
-.file {
-    position: relative;
-    height: 18px;
-    padding-left: 25px;
-    margin: 5px 0 5px 0;
-    overflow: visible;
 }
 .file::before {
     content: "";
